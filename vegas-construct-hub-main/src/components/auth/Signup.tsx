@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
 import axios from 'axios'
+import myImg from '../../../public/images/logo.png'
 
 interface SignupProps {
   onViewChange: (view: 'login' | 'signup' | 'forgot') => void;
@@ -42,7 +43,7 @@ const Signup = ({ onViewChange }: SignupProps) => {
 
     const response = await axios.post('http://localhost:4000/agent/register',formData)
 
-    // console.log(response);
+    console.log(response);
 
     toast({
       title: "Account Created!",
@@ -55,9 +56,10 @@ const Signup = ({ onViewChange }: SignupProps) => {
     <Card className="w-full shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
       <CardHeader className="space-y-1 text-center">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+          {/* <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
             <div className="w-8 h-8 bg-white rounded-lg"></div>
-          </div>
+          </div> */}
+          <img src={myImg} alt="" />
         </div>
         <CardTitle className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
           Join Vegas Construction
@@ -72,7 +74,7 @@ const Signup = ({ onViewChange }: SignupProps) => {
             <Label htmlFor="firstName">First Name *</Label>
             <Input
               id="firstName"
-              placeholder="John"
+              placeholder="First Name"
               value={formData.firstName}
               onChange={(e) => setFormData({...formData, firstName: e.target.value})}
             />
@@ -81,7 +83,7 @@ const Signup = ({ onViewChange }: SignupProps) => {
             <Label htmlFor="lastName">Last Name *</Label>
             <Input
               id="lastName"
-              placeholder="Doe"
+              placeholder="Last Name"
               value={formData.lastName}
               onChange={(e) => setFormData({...formData, lastName: e.target.value})}
             />
@@ -93,7 +95,7 @@ const Signup = ({ onViewChange }: SignupProps) => {
           <Input
             id="email"
             type="email"
-            placeholder="john.doe@company.com"
+            placeholder="email@company.com"
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
           />

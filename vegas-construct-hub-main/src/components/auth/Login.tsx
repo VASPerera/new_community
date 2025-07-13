@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
 import axios from 'axios';
+import myImag from './../../../public/images/logo.png';
 
 interface LoginProps {
   onViewChange: (view: 'login' | 'signup' | 'forgot') => void;
@@ -58,9 +59,10 @@ const Login = ({ onViewChange }: LoginProps) => {
     <Card className="w-full shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
       <CardHeader className="space-y-1 text-center">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+          {/* <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
             <div className="w-8 h-8 bg-white rounded-lg"></div>
-          </div>
+          </div> */}
+          <img src={myImag} alt="logo" />
         </div>
         <CardTitle className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
           Vegas Construction

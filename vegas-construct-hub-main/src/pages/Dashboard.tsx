@@ -90,10 +90,11 @@ const Dashboard = () => {
   const getProject = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/project/projects/${projectId}`
+        `http://localhost:4000/project/projectsby/${projectId}`
       );
 
       const data = response.data.project;
+      console.log(data)
 
       setProject({
         id: data._id,
@@ -199,9 +200,10 @@ const Dashboard = () => {
   const fetchBudgetDetails = async () => {
     try {
       const projectResponse = await axios.get(
-        `http://localhost:4000/project/projects/${projectId}`
+        `http://localhost:4000/project/projectsby/${projectId}`
       );
       const data = projectResponse.data.project;
+      console.log(data.budget)
 
       const totalBudget = data.budget;
       const budgetResponse = await axios.get(
@@ -296,6 +298,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    console.log("projectId in useEffect:", projectId);
     if (projectId) {
       initializeData();
     }

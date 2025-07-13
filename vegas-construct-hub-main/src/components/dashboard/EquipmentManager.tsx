@@ -343,7 +343,7 @@ const EquipmentManager = () => {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="value">Value ($)</Label>
+                  <Label htmlFor="value">Value (LKR)</Label>
                   <Input
                     id="value"
                     type="number"

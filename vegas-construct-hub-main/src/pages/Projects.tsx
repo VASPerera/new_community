@@ -32,6 +32,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import axios from "axios";
+import myImg from '../../public/images/logo.png'
 
 interface Project {
   _id: string;
@@ -101,6 +102,8 @@ const Projects = () => {
       return;
     }
 
+    const agentId = localStorage.getItem("agentId");
+
     const project: Project = {
       _id: Date.now().toString(),
       projectName: newProject.name,
@@ -114,7 +117,7 @@ const Projects = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/project/create",
+        `http://localhost:4000/project/create/${agentId}`,
         {
           ...newProject,
           projectName: newProject.name,
@@ -159,6 +162,7 @@ const Projects = () => {
   };
 
   const handleProjectClick = (projectId: string) => {
+    console.log(projectId)
     navigate(`/dashboard/${projectId}`);
   };
 
@@ -193,8 +197,9 @@ const Projects = () => {
 
   const getAllProjects = async () => {
     try {
+      const agentId = localStorage.getItem("agentId");
       const response = await axios.get(
-        "http://localhost:4000/project/projects"
+        `http://localhost:4000/project/projects/${agentId}`
       );
       console.log(response.data.data);
       setProjects(response.data.data);
@@ -237,7 +242,8 @@ const Projects = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-lg"></div>
+              {/* <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-lg"></div> */}
+              <img className="w-9 h-9" src={myImg} alt="image" />
               <h1 className="text-2xl font-bold text-gray-900">
                 Vegas Construction
               </h1>

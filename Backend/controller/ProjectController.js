@@ -1,26 +1,51 @@
 const ProjectSchema = require("../model/ProjectSchema");
 
+// const createProject = async (req, res) => {
+//   try {
+//     const { projectName, location, budget, startDate, description } = req.body;
+
+//     if (!projectName || !location || !budget ) {
+//       return res.status(400).json({ status: "Error", message: "All fields are required." });
+//     }
+
+//     const project = await ProjectSchema.create({
+//       projectName: projectName,
+//       location: location,
+//       budget: budget,
+//       startDate: startDate,
+//       description: description
+//     });
+
+//     res.status(201).json({ status: "Success", project: project });
+//   } catch (error) {
+//     res.status(500).json({ status: "Error", message: error.message });
+//   }
+// };
+
 const createProject = async (req, res) => {
   try {
+    const { agentId } = req.params;
     const { projectName, location, budget, startDate, description } = req.body;
 
-    if (!projectName || !location || !budget ) {
+    if (!projectName || !location || !budget || !startDate || !description || !agentId) {
       return res.status(400).json({ status: "Error", message: "All fields are required." });
     }
 
     const project = await ProjectSchema.create({
-      projectName: projectName,
-      location: location,
-      budget: budget,
-      startDate: startDate,
-      description: description
+      projectName,
+      location,
+      budget,
+      startDate,
+      description,
+      agent: agentId,
     });
 
-    res.status(201).json({ status: "Success", project: project });
+    res.status(201).json({ status: "Success", project });
   } catch (error) {
     res.status(500).json({ status: "Error", message: error.message });
   }
 };
+
 
 const getProjectById = async (req, res) => {
   try {
@@ -31,15 +56,27 @@ const getProjectById = async (req, res) => {
       return res.status(404).json({ message: "Project not found" });
     }
 
-    res.status(200).json({message:"success",project});
+    res.status(200).json({message:"successy", project});
   } catch (error) {
     res.status(500).json({ status: "Error", message: error.message });
   }
 };
 
+// const getAllProjects = async (req, res) => {
+//   try {
+//     const projects = await ProjectSchema.find();
+//     res.status(200).json({ status: "Success", data: projects });
+//   } catch (error) {
+//     res.status(500).json({ status: "Error", message: error.message });
+//   }
+// };
+
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await ProjectSchema.find();
+    const { agentId } = req.params;
+
+    const projects = await ProjectSchema.find({ agent: agentId });
+
     res.status(200).json({ status: "Success", data: projects });
   } catch (error) {
     res.status(500).json({ status: "Error", message: error.message });

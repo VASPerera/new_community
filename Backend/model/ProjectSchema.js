@@ -21,7 +21,12 @@ const ProjectSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-    }
+    },
+    agent: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Agent", // references the Agent model
+      required: true,
+    },
   },
   {
     timestamps: true 
